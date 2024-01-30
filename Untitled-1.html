@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+            gap: 25px;
+            background-color: wheat;
+        }
+
+        .box {
+            height: 20vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background-color: rgb(248, 248, 94);
+            /* border: 1px solid; */
+        }
+
+        .text {
+            font-size: 26px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+            color: black;
+        }
+
+        .ptext {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: black;
+        }
+
+        .box2 {
+            height: 15vh;
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /* border: 1px solid; */
+        }
+
+        .inp {
+            height: 6vh;
+            width: 30%;
+            padding-left: 1%;
+        }
+
+        .inp2 {
+            height: 6vh;
+            width: 30%;
+            padding-left: 1%;
+        }
+
+        .btn {
+            height: 6vh;
+            width: 18%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+            color: white;
+            background-color: green;
+            border: none;
+        }
+
+        .box3 {
+            height: auto;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: white;
+            /* border: 1px solid; */
+        }
+
+        .btn2 {
+            height: 5vh;
+            width: 14%;
+            background-color: blue;
+            color: white;
+            font-size: 16px;
+            font-weight: 400;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="box">
+            <h1 class="text">Bookmark Application</h1>
+            <p class="ptext">Bookmark your favorite Website and link</p>
+        </div>
+        <div class="box2">
+            <input type="url" placeholder="Enter URL" id="" class="inp">
+            <input type="text" placeholder="Enter title" id="" class="inp2">
+            <button class="btn">Bookmake</button>
+        </div>
+        <div class="box3"></div>
+    </div>
+
+
+    <script>
+        let inp = document.querySelector(".inp");
+        let inp2 = document.querySelector(".inp2");
+        let btn = document.querySelector(".btn");
+        let box3 = document.querySelector(".box3");
+
+        let arr = [];
+
+
+
+        btn.addEventListener("click", clicking);
+
+        function clicking() {
+            let vin = inp.value;
+            let vin2 = inp2.value;
+            let obj = {
+                name: vin2,
+                url: vin,
+            };
+
+            arr.push(obj);
+            displayBookmarks();
+
+            inp.value = '';
+            inp2.value = '';
+        }
+
+
+        function displayBookmarks() {
+            box3.innerHTML = '';
+
+            arr.forEach((e) => {
+                let div = document.createElement('div');
+                div.innerHTML = `
+            <h3>${e.name}</h3>
+            <a href="${e.url}" target="_blank">Visit</a>
+            <button class="btn2" onclick="deleteBookmark('${e.url}')">Delete</button>
+        `;
+                box3.appendChild(div);
+            });
+        }
+
+        function deleteBookmark(url) {
+            arr = arr.filter((bookmark) => bookmark.url !== url);
+            displayBookmarks();
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>
